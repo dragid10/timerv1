@@ -16,11 +16,11 @@ var path = require('path'),
     methodOverride = require('method-override'),
     errorHandler = require('errorhandler'),
     moment = require('moment'),
-    multer = require('multer'),
-    upload = multer({
+    multer = require('multer');
+/*upload = multer({
         dest: path.join(__dirname, 'public/upload/temp')
-    }),
-    session = require('express-session');
+ });*/
+// session = require('express-session');
 
 /*Defines the actual module that this file makes*/
 
@@ -61,9 +61,9 @@ module.exports = function (app) {
     app.use(cookieParser('some-secret-value-here'));
 
     // Enables sessions!
-    app.use(session({
+    /*app.use(session({
         secret: "SOME SECRET"
-    }));
+     }));*/
 
     // Tells Express that you're using a router with your server. Respond to requests like GET, POST, PUT, UPDATE
     routes(app); //moving the routes to routes folder
