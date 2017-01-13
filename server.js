@@ -11,7 +11,7 @@ var express = require('express'),
 /*Defines constants for the application using node.*/
 
 // sets port equal to the default port of the system. Fallback port is 3300
-app.set('port', process.env.PORT || 3300);
+app.set('port', process.env.PORT || 3610);
 
 // Sets views to the views directory 
 app.set('views', __dirname + '/views');
