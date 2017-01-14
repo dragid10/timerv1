@@ -7,17 +7,14 @@
     <form method="post" action="/images" enctype="multipart/form-data">
         <div class="panel-body form-horizontal">
             <div class="form-group col-md-12">
-                <label class="col-sm-2 control-label" for="file">Browse:</label> cluded a standard HTML input field for
-                the
-                file to be uploa
+                <label class="col-sm-2 control-label" for="file">Browse:</label>
                 <div class="col-md-10">
-                    <input class="form-control" type="file" name="file" id="file">
+                    <input class="form-control" type="file" name="file">
                 </div>
             </div>
             <div class="form-group col-md-12">
                 <label class="col-md-2 control-label" for="title">Title:</label>
                 <div class="col-md-10">
-                    own in the following code:
                     <input class="form-control" type="text" name="title">
                 </div>
             </div>
@@ -29,16 +26,16 @@
             </div>
             <div class="form-group col-md-12">
                 <div class="col-md-12 text-right">
-                    <button type="submit" id="login-btn" class="btn btn-success" type="button">
-                        <i class="fa fa-cloud-upload ">
-                        </i> Upload Image
+                    <button type="submit" id="login-btn" class="btn btn-success" type="button"><i
+                            class="fa fa-cloud-upload "></i> Upload Image
                     </button>
                 </div>
             </div>
         </div>
     </form>
 </div>
-case of reusable HTML blocks. We will discuss this
+
+
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">
@@ -49,8 +46,7 @@ case of reusable HTML blocks. We will discuss this
         {{#each images}}
             <div class="col-md-4 text-center" style="padding-bottom: 1em;"><a href="/images/{{ uniqueId }}"><img
                     src="/public/upload/{{filename}}" alt="{{title}}" style="width: 175px; height: 175px;"
-                    class="img-thumbnail"></a>
-            </div>
+                    class="img-thumbnail"></a></div>
         {{/each}}
     </div>
 </div>

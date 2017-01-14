@@ -1,8 +1,22 @@
+/*
+ Name: Alex Oladele
+ Date: 1/12/2017
+ Course: CSE 270e
+ */
+
+// Modules used
 var fs = require('fs'),
     path = require('path'),
     sidebar = require('../helpers/sidebar');
 
+// Exports a module with these functions (index, create, like, comment)
 module.exports = {
+    /**
+     *
+     * @param req What the browser sends sends to the server (modified using middleware)
+     * @param res What the server is ending back to the browser / client
+     */
+
     index: function (req, res) {
         var viewModel = {
             image: {
@@ -45,8 +59,8 @@ module.exports = {
                 imgUrl += possible.charAt(Math.floor(Math.random() *
                     possible.length));
             }
-            var tempPath = req.files.file.path,
-                ext = path.extname(req.files.file.name).toLowerCase(),
+            var tempPath = req.files[0].path,
+                ext = path.extname(req.files[0].originalname).toLowerCase(),
                 targetPath = path.resolve('./public/upload/' + imgUrl + ext);
             if (ext === '.png' || ext === '.jpg' || ext === '.jpeg' || ext === '.gif') {
                 fs.rename(tempPath, targetPath, function (err) {
@@ -72,6 +86,7 @@ module.exports = {
             likes: 1
         });
     },
+
     comment: function (req, res) {
         res.send('The image:comment POST controller');
     }

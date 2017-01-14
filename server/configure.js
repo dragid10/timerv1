@@ -4,7 +4,11 @@
  Course: CSE 270e
  */
 
-// Pulls in dependencies (modules)
+/*
+ * Handles the setup for all the middleware used in the program
+ */
+
+/* Modules Used */
 var path = require('path'),
     routes = require('./routes'),
     // Templating engine used for views
@@ -16,19 +20,27 @@ var path = require('path'),
     methodOverride = require('method-override'),
     errorHandler = require('errorhandler'),
     moment = require('moment'),
-    multer = require('multer');
-/*upload = multer({
-        dest: path.join(__dirname, 'public/upload/temp')
- });*/
-// session = require('express-session');
+    multer = require('multer'),
+    session = require('express-session');
+/* End of Modules */
 
-/*Defines the actual module that this file makes*/
 
-// module that accepts an app object as a parameter
+/*
+ * Defines the actual module that this file makes
+ * Function that accepts the app object as a parameter, and returns the same object
+ */
 module.exports = function (app) {
+    /**
+     * @param "handlebars" - The file extension that the rendering engine should look for (aka handlebars)
+     * @param exphbs.create - Calls express-hbs create function. Takes options object as a parameter that defines constants for server
+     */
     app.engine('handlebars', exphbs.create({
         defaultLayout: 'main',
+
+        // sets layoutsDir to the layouts folder
         layoutsDir: app.get('views') + '/layouts',
+
+        // sets partialsDir to the partials folder
         partialsDir: [app.get('views') + '/partials'],
         helpers: {
             timeago: function (timestamp) {
@@ -37,44 +49,44 @@ module.exports = function (app) {
             }
         }
     }).engine);
+
+    // view-engine = handlebars
     app.set('view engine', 'handlebars');
 
 
-    /*Middleware used!*/
-    // Used for logging, helpful for debugging
+    /*
+     * Middleware used!
+     */
+
+    // Used for logging, helpful for debugging Node server
     app.use(morgan('dev'));
 
-    // Packs up any form fields that are submitted via HTTP. Fields submitted via post are available via req.body
-    // app.use(bodyParser({
-    //     uploadDir: path.join(__dirname, 'public/upload/temp')
-    // }));
-
-    // app.use(upload);
     app.use(multer({
         dest: path.join(__dirname, 'public/upload/temp')
-    }));
+    }).any());
 
-    // For older browsers that don't support REST HTTP verbs (cuz they're dumb)
+    // For older browsers that don't support REST HTTP verbs (e.g. UPDATE, PUT, ETC) (cuz they're dumb)
     app.use(methodOverride());
 
-    // Allows cookies to be sent and recieved 
+    // Allows cookies to be sent and received
     app.use(cookieParser('some-secret-value-here'));
 
-    // Enables sessions!
+    // Enables sessions! TODO Come back to uncomment this
     /*app.use(session({
-        secret: "SOME SECRET"
+     secret: "Adetayo"
      }));*/
 
-    // Tells Express that you're using a router with your server. Respond to requests like GET, POST, PUT, UPDATE
+    // Tells Express that you're using (Express) router with your server. Respond to requests like GET, POST, PUT, UPDATE
     routes(app); //moving the routes to routes folder
 
     // Renders static content files from predefined directories
     app.use('/public/', express.static(path.join(__dirname, '../public')));
     if ('development' === app.get('env')) {
+
         // Handles any errors that occur throughout middleware process
         app.use(errorHandler());
     }
-    routes(app);
+
     return (app);
 
 };

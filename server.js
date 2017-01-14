@@ -4,23 +4,25 @@
  Course: CSE 270e
  */
 
+/*
+ * Modules
+ */
 var express = require('express'),
-    config = require('./server/configure'),
-    app = express();
+    config = require('./server/configure'), // configure.js
+    app = express(); // assigns global var app to the express function
 
 /*Defines constants for the application using node.*/
 
-// sets port equal to the default port of the system. Fallback port is 3300
+// Constant that sets port equal to the default port of the system. Fallback port is 3300
+// Port = 3610
 app.set('port', process.env.PORT || 3610);
 
-// Sets views to the views directory 
+// Constant that Sets views to the views directory
+// views = views folder
 app.set('views', __dirname + '/views');
-app = config(app);
 
-/*// When browser looks at the root of the server, it displays a "Hello World" page
- app.get('/', function(req, res) {
- res.send("Hello World");
- });*/
+// Passes app through the config (configure.js) module
+app = config(app);
 
 // Listens for when the server is up and prints a message to the console
 var server = app.listen(app.get("port"), function () {

@@ -3,12 +3,21 @@
  Date: 1/12/2017
  Course: CSE 270e
  */
+
+
 var sidebar = require('../helpers/sidebar');
 
+// Exports Module with single function called index
 module.exports = {
+    /**
+     *
+     * @param req What the browser sends sends to the server (modified using middleware)
+     * @param res What the server is ending back to the browser / client
+     */
     index: function (req, res) {
+        // TODO Come back to do something about this
         var viewModel = {
-            images: [{
+            /*images: [{
                 uniqueId: 1,
                 title: 'Sample Image 1',
                 description: '',
@@ -40,10 +49,11 @@ module.exports = {
                 views: 0,
                 likes: 0,
                 timestamp: Date.now
-            }]
+             }]*/
+
         };
-        sidebar(viewModel, function (viewModel) {
-            res.render('index', viewModel);
-        });
+        // sidebar(viewModel, function (viewModel) {
+        res.render('layouts/main');
+        // });
     }
 };

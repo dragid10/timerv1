@@ -1,51 +1,50 @@
-<!DOCTYPE HTML>
+<!--
+* Name: Alex Oladele
+* Date: 1/13/17
+* Course: CSE 270e
+* Assignment: Timer v1.0
+-->
+
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title>imgPloadr.io</title>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/public/css/styles.css">
+    <meta charset="UTF-8">
+    <title>Oladelaa Timer</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/0ea6c42e2b.js"></script>
 </head>
-
 <body>
-<div class="page-header">
-    <div class="container">
-        <div class="col-md-6">
-            <h1><a href="/">imgPloadr.io</a></h1>
-        </div>
-    </div>
-</div>
 <div class="container">
-    <div class="row">
-        <div class="col-sm-8">
-            {{{ body }}}
-        </div>
-        <div class="col-sm-4">
-            {{> stats this }}
-
-            {{> popular this }}
-
-            {{> comments this }}
-        </div>
-    </div>
-</div>
-<div style="border-top: solid 1px #eee; padding-top: 1em;">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                <p class="text-muted">imgPloadr.io | &copy; Copyright 2014, All Rights Reserved
-                </p>
-                <p class="text-center">
-                    <i class="fa fa-twitter-square fa-2x text-primary"></i>
-                    <i class="fa fa-facebook-square fa-2x text-primary"></i>
-                </p>
+    <!--    <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Timers</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+                </ul>
             </div>
-        </div>
-    </div>
+        </nav>-->
+    {{ navbar }}
 </div>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script type="text/javascript" src="/public/js/scripts.js"></script>
-</body>
+{{! Every view gets inserted here }}
+{{{content}}}
 
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
 </html>
