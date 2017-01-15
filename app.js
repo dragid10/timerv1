@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var moment = require('moment');
 
-var index = require('/views/index.handlebars');
 var users = require('routes/users');
 
 var app = express();
