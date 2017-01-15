@@ -9,19 +9,23 @@
 // Grab modules needed
 var express = require('express'),
     router = express.Router(),
-    home = require('../controllers/home'),
-    image = require('../controllers/image');
+    home = require('../controllers/home');
 
 // Creates the module that this file is and attaches all the routes to the app instance
 // Routes to the proper controller and data for the controller | Remember that home is a var, and index is one of its properties
 // TODO Add routes for the different pages
+
 module.exports = function (app) {
+    /**
+     * @param path - The path that the browser must go to in order to invoke the callback function
+     * @param callBack - The controller that handles what happens when the browser goes to this page
+     */
     router.get('/', home.index);
-    // :image_id acts as a wildcard for any image value, second parameter is callback function
-    router.get('/images/:image_id', image.index);
-    router.post('/images', image.create);
-    router.post('/images/:image_id/like', image.like);
-    router.post('/images/:image_id/comment', image.comment);
+    router.get('/about', home.about);
+    router.get('/loginform', home.loginform);
+    router.get('/logout', home.logout);
+    // TODO Complete the post for this
+    router.post('/loginform', home.loginFormSubmit);
 
     // Attaches routes to app instance
     app.use(router);

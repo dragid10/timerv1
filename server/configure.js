@@ -35,13 +35,16 @@ module.exports = function (app) {
      * @param exphbs.create - Calls express-hbs create function. Takes options object as a parameter that defines constants for server
      */
     app.engine('handlebars', exphbs.create({
-        defaultLayout: 'main',
+        // Sets the default layout to be
+        defaultLayout: 'timer',
 
         // sets layoutsDir to the layouts folder
         layoutsDir: app.get('views') + '/layouts',
 
         // sets partialsDir to the partials folder
         partialsDir: [app.get('views') + '/partials'],
+
+        // Creates the timeago helper (in the helpers property) for global use throughout the program
         helpers: {
             timeago: function (timestamp) {
                 console.log(timestamp);
@@ -72,9 +75,12 @@ module.exports = function (app) {
     app.use(cookieParser('some-secret-value-here'));
 
     // Enables sessions! TODO Come back to uncomment this
-    /*app.use(session({
-     secret: "Adetayo"
-     }));*/
+    app.use(session({
+        secret:            "Adetayo Alexander Oluwaseyi Oladele",
+        resave:            true,
+        saveUninitialized: false,
+        cookie:            {}
+    }));
 
     // Tells Express that you're using (Express) router with your server. Respond to requests like GET, POST, PUT, UPDATE
     routes(app); //moving the routes to routes folder

@@ -2,29 +2,27 @@
 * Name: Alex Oladele
 * Date: 1/13/17
 * Course: CSE 270e
-* Assignment: //TODO 
+* Assignment: Timer v1.0
 -->
-
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-    <link rel="stylesheet" href="../public/css/styles.css">
+    <script src="../public/js/loginForm.js"></script>
+    <link href="../public/css/loginForm.css" rel="stylesheet">
 </head>
-<body>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-6">
-            <div class="row">
-                <div class="col-sm-12 ">
-                    <div> Words and stuff</div>
-                </div>
-                <div class="col-sm-12 ">More</div>
-            </div>
-        </div>
-        <div class="col-xs-6 blue"></div>
+
+<!--<div >-->
+<br>
+<h2>Login to Timer</h2>
+<br>
+<form role="form" method="post" id="loginForm">
+    <div class="container">
+        <label for="username"><b>Username</b></label>
+        <input type="text" class="form-control" placeholder="Enter Username" name="username" id="username" required>
+
+        <label for="password"><b>Password</b></label>
+        <input type="password" class="form-control" placeholder="Enter Password" name="password" id="password" required>
+
+        <button id="login-btn" type="submit">Login</button>
     </div>
-</div>
-</body>
-</html>
+</form>
+<br>
+<!--</div>-->
