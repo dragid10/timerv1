@@ -106,3 +106,12 @@ build-iPhoneSimulator/
 .rvmrc
 
 # End of https://www.gitignore.io/api/jetbrains,ruby
+/Guardfile
+/Gemfile
+/Gemfile.lock
+/.directory
+/helpers/sidebar.js
+/helpers/comments.js
+/helpers/stats.js
+/helpers/images.js
+/bin/
