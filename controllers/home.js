@@ -6,6 +6,7 @@
 
 
 var sidebar = require('../helpers/sidebar');
+loginid = "";
 
 // Exports Module with single function called index
 module.exports = {
@@ -15,48 +16,15 @@ module.exports = {
      * @param res What the server is ending back to the browser / client
      */
     index: function (req, res) {
-        // TODO Come back to do something about this
-        // JS Object that contains properties that hbs uses to fill the HTML
         var viewModel = {
-            /*images: [{
-             uniqueId: 1,
-             title: 'Sample Image 1',
-             description: '',
-             filename: 'sample1.jpg',
-             views: 0,
-             likes: 0,
-             timestamp: Date.now
-             }, {
-             uniqueId: 2,
-             title: 'Sample Image 2',
-             description: '',
-             filename: 'sample2.jpg',
-             views: 0,
-             likes: 0,
-             timestamp: Date.now
-             }, {
-             uniqueId: 3,
-             title: 'Sample Image 3',
-             description: '',
-             filename: 'sample3.jpg',
-             views: 0,
-             likes: 0,
-             timestamp: Date.now
-             }, {
-             uniqueId: 4,
-             title: 'Sample Image 4',
-             description: '',
-             filename: 'sample4.jpg',
-             views: 0,
-             likes: 0,
-             timestamp: Date.now
-             }]*/
-
+            loginid: loginid
         };
-        // res .render('index', viewModel);
-        // sidebar(viewModel, function (viewModel) {
-        res.render('main');
-        // });
+
+        if (loginid === "" || loginid === null || loginid === undefined) {
+            res.render('main');
+        } else {
+            res.render('timer', viewModel);
+        }
     },
 
     about: function (req, res) {
@@ -74,15 +42,23 @@ module.exports = {
     loginFormSubmit: function (req, res) {
         var dataIn = req.body;
 
+
         // Checks to verify that both pieces of information are there, and that password equals test
         if (dataIn.username && dataIn.password && dataIn.password === "test") {
             req.session.userid = dataIn.username;
+            loginid = req.session.userid;
+
             res.redirect('/');
+            // res.render('timer')
         } else {
-            var errormsg = {
-                errormsg: "invalid username or password"
+            req.session.userid = dataIn.username;
+            var userid = req.session.userid;
+
+            var failure = {
+                errormsg: "invalid username or password",
+                userid:   userid
             };
-            res.render('loginform', errormsg)
+            res.render('loginform', failure)
         }
     }
 };

@@ -19,13 +19,17 @@
     <div class="container">
         <label for="username"><b>Username</b></label>
 
-        <!-- TODO  Add required back-->
-        <input type="text" class="form-control" placeholder="Enter Username" name="username" id="username">
+        {{#if userid}}
+            <input type="text" class="form-control" placeholder="Enter Username" name="username" id="username"
+                   value={{userid}} required>
+        {{else}}
+            <input type="text" class="form-control" placeholder="Enter Username" name="username" id="username" required>
+        {{/if}}
+
 
         <label for="password"><b>Password</b></label>
 
-        <!-- TODO  Add required back-->
-        <input type="password" class="form-control" placeholder="Enter Password" name="password" id="password">
+        <input type="password" class="form-control" placeholder="Enter Password" name="password" id="password" required>
 
         <button id="loginBtn" type="submit">Login</button>
     </div>

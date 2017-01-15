@@ -55,7 +55,17 @@
             </ul>
         </div>
     </nav>
-</div>
+
+{{#if loginid}}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">Hello there {{loginid}}!
+                </div>
+            </div>
+        </div>
+    </div>
+{{/if}}
+<!--</div>-->
 <div>
     {{{ body }}}
 </div>
@@ -65,7 +75,7 @@
 <div class="container">
     <div class="row">
         <div id="tagDiv" class="col-xs-12">
-            <span> <p>Timer Application</p> </span>
+            <span> Timer Application </span>
         </div>
 
     </div>
