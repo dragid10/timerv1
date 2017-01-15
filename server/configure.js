@@ -72,6 +72,10 @@ module.exports = function (app) {
     app.use(methodOverride());
 
     // Allows cookies to be sent and received
+
+    // Packs up any form fields that are submitted via HTTP. Fields submitted via post are available via req.body
+    app.use(bodyParser.urlencoded());
+
     app.use(cookieParser('some-secret-value-here'));
 
     // Enables sessions! TODO Come back to uncomment this

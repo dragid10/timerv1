@@ -72,9 +72,17 @@ module.exports = {
     },
 
     loginFormSubmit: function (req, res) {
+        var dataIn = req.body;
 
-        if (username !== "") {
-            res.redirect('/')
+        // Checks to verify that both pieces of information are there, and that password equals test
+        if (dataIn.username && dataIn.password && dataIn.password === "test") {
+            req.session.userid = dataIn.username;
+            res.redirect('/');
+        } else {
+            var errormsg = {
+                errormsg: "invalid username or password"
+            };
+            res.render('loginform', errormsg)
         }
     }
 };

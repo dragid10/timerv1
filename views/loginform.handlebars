@@ -12,16 +12,22 @@
 <!--<div >-->
 <br>
 <h2>Login to Timer</h2>
+{{#if errormsg}}
+    <div class="alert alert-danger"><strong>Error:</strong> Invalid Username or Password</div> {{/if}}
 <br>
 <form role="form" method="post" id="loginForm">
     <div class="container">
         <label for="username"><b>Username</b></label>
-        <input type="text" class="form-control" placeholder="Enter Username" name="username" id="username" required>
+
+        <!-- TODO  Add required back-->
+        <input type="text" class="form-control" placeholder="Enter Username" name="username" id="username">
 
         <label for="password"><b>Password</b></label>
-        <input type="password" class="form-control" placeholder="Enter Password" name="password" id="password" required>
 
-        <button id="login-btn" type="submit">Login</button>
+        <!-- TODO  Add required back-->
+        <input type="password" class="form-control" placeholder="Enter Password" name="password" id="password">
+
+        <button id="loginBtn" type="submit">Login</button>
     </div>
 </form>
 <br>
