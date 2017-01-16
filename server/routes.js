@@ -13,7 +13,6 @@ var express = require('express'),
 
 // Creates the module that this file is and attaches all the routes to the app instance
 // Routes to the proper controller and data for the controller | Remember that home is a var, and index is one of its properties
-// TODO Add routes for the different pages
 
 module.exports = function (app) {
     /**
@@ -24,7 +23,6 @@ module.exports = function (app) {
     router.get('/about', home.about);
     router.get('/loginform', home.loginform);
     router.get('/logout', home.logout);
-    // TODO Complete the post for this
     router.post('/loginform', home.loginFormSubmit);
 
     // Attaches routes to app instance

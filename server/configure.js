@@ -76,9 +76,9 @@ module.exports = function (app) {
     // Packs up any form fields that are submitted via HTTP. Fields submitted via post are available via req.body
     app.use(bodyParser.urlencoded({extended: true}));
 
-    app.use(cookieParser('some-secret-value-here'));
+    app.use(cookieParser('Long-Ago-The-Four-Nations-Lived-Together-In-Harmony-Then-Everything-Changed-When-The-Fire-Nation-Attacked'));
 
-    // Enables sessions! TODO Come back to uncomment this
+    // Enables sessions!
     app.use(session({
         secret:            "Adetayo Alexander Oluwaseyi Oladele",
         resave:            true,

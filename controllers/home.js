@@ -31,8 +31,19 @@ module.exports = {
     },
 
     about: function (req, res) {
+        // Puts the loginid in a viewModel to return to the about page
+        var viewModel = {
+            loginid: loginid
+        };
+
+        // Checks to see if use is logged in, to keep login/out btn consistent across all pages
+        if (loginid === "" || loginid === null || loginid === undefined) {
+            res.render('about');
+        } else {
+            res.render('about', viewModel);
+        }
+
         // Takes user to the about page
-        res.render('about');
     },
 
     loginform: function (req, res) {

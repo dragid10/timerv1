@@ -26,5 +26,5 @@ app = config(app);
 
 // Listens for when the server is up and prints a message to the console
 var server = app.listen(app.get("port"), function () {
-    console.log("Server up: http://localhost:" + app.get("port"));
+    console.log("Server up: http://127.0.0.1:" + app.get("port"));
 });
