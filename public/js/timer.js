@@ -124,7 +124,7 @@ $(document).ready(function () {
         timeLeft = timers[timerNum].doneTime - getNow();
         var q = convertFromSeconds(timers[timerNum].doneTime);
         // TODO See if this part is really necessary
-        // q.hrs = q.hrs % 12 + 7;
+        q.hrs = q.hrs % 12;
         // TODO Potentially change with doneTime var
         $(timeElement + " .timerdonetime").html(twoDigits(q.hrs) + ":" + twoDigits(q.min) + ":" + twoDigits(q.sec));
 
@@ -168,6 +168,14 @@ $(document).ready(function () {
         return $(context).closest(".timers").attr('id') === "timer3";
     }
 
+    function deleteBtn(context) {
+        debugger;
+        var startBtn = $(context).siblings(".btn-js");
+        startBtn.switchClass("btn-info", "btn-success").switchClass("btn-warning", "btn-success");
+        startBtn.text("Start");
+        $(context).remove();
+    }
+
     // =============================================================== End Functions
 
     /**
@@ -186,7 +194,7 @@ $(document).ready(function () {
     $("#timer1, #timer2, #timer3").find(".hours, .minutes, .seconds").keyup(function () {
 
         // Checks to make sure that values are valid for hours
-        if ($(".hours").val() > 11 || $(".hours").val() < 0 || $(".hours").val() === undefined) {
+        if ($(".hours").val() > 9 || $(".hours").val() < 0 || $(".hours").val() === undefined) {
             $(this).val(0);
         }
         // Checks to make sure that values are valid for minutes
@@ -214,14 +222,8 @@ $(document).ready(function () {
 
     });
 
-    // Defines some action when a start button is clicked
+    // The processes that occur when start button clicked!
     $(".btn-js").click(function () {
-
-
-
-        // TODO Delete this maybe
-        /*  curTime = getNow();
-         doneTime = timeToAdd + curTime;*/
 
         // Switch statement that changes the Buttons and colors when clicked
         switch ($(this).text()) {
@@ -266,7 +268,7 @@ $(document).ready(function () {
                 $(".buttons").css("display", "inline-block");
                 $("<button type=\"button\" class=\"btn btn-danger\" id='reset'>Reset</button>").insertAfter(this).addClass("btn-reset");
                 break;
-            //    If Pause button clicked, then changes color and text to Resume and starts timer TODO ADD PAUSE TIMER FUNCTIONALITY
+            //    If Pause button clicked, then changes color and text to Resume and starts timer
             case "Pause":
                 console.log($(this).closest(".timers"));
                 $(this).text("Resume").switchClass("btn-warning", "btn-info");
@@ -281,11 +283,11 @@ $(document).ready(function () {
                     tempTimer.state = 2;
                 }
                 break;
-            //    If Resume clicked, changes btn color and text to paus TODO ADD RESUME TIMER FUNCTIONALITY
+            //    If Resume clicked, changes btn color and text to pause
             case "Resume":
                 $(this).text("Pause").switchClass("btn-info", "btn-warning");
                 if (isTimer1($(this))) {
-                    debugger;
+                    // debugger;
                     tempTimer = timers[0];
                     tempTimer.state = 1;
                 } else if (isTimer2($(this))) {
@@ -300,38 +302,26 @@ $(document).ready(function () {
             default:
                 console.log("Hit Default statement for some reason");
         }
-
-
-        // TODO ADD RESET FUNCTIONALITY
-        /* TODO USE THIS FOR STOP
-         /!*$(this).text("Start").switchClass("btn-warning", "btn-success");
-         $(this).siblings(".btn-reset").remove();
-         $(".buttons").css("display", "block");*!/
-         }*/
+        // Reset button clears timerss
+        if ($("#reset").length) {
+            $("#reset").click(function () {
+                if (isTimer1($(this))) {
+                    timers[0].doneTime = 0;
+                    $(".timer1").find(".hours, .minutes, .seconds").val("");
+                    updateTimerDisplay(0);
+                    deleteBtn($(this));
+                } else if (isTimer2($(this))) {
+                    timers[1].doneTime = 0;
+                    $(".timer2").find(".hours, .minutes, .seconds").val("");
+                    updateTimerDisplay(0);
+                    deleteBtn($(this));
+                } else if (isTimer3($(this))) {
+                    timers[2].doneTime = 0;
+                    $(".timer3").find(".hours, .minutes, .seconds").val("");
+                    updateTimerDisplay(0);
+                    deleteBtn($(this));
+                }
+            })
+        }
     });
-
-    // Reset button clears timers
-    if ($("#reset").length) {
-        $("#reset").click(function () {
-            console.log("Reset clicked");
-
-            console.log($(this).closest(".timername"));
-
-            $(this).closest(".timername").val("");
-            $(this).closest(".hours").val("");
-            $(this).closest(".minutes").val("");
-            $(this).closest(".seconds").val("");
-            if (isTimer1($(this))) {
-                timers[0].doneTime = 0;
-                timers[0].state = 0;
-            } else if (isTimer2($(this))) {
-                timers[1].doneTime = 0;
-                timers[1].state = 0;
-            } else if (isTimer3($(this))) {
-                timers[2].doneTime = 0;
-                timers[2].state = 0;
-            }
-        })
-    }
-
 });
