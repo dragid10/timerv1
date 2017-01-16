@@ -10,9 +10,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Oladelaa Timer</title>
+
+    <link href="https://necolas.github.io/normalize.css/5.0.0/normalize.css" rel="stylesheet" type="text/css">
+
+    <!-- Latest Compiled and Minified jQuery -->
     <script
             src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+
+    <!-- Latest Complied and Minified  jQuery UI -->
+    <script
+            src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
             crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified CSS -->
@@ -24,9 +34,10 @@
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
     <!-- Font Awesome -->
-    <script src="https://use.fontawesome.com/0ea6c42e2b.js"></script>
+    <script src="https://use.fontawesome.com/0ea6c42e2b.js" type="text/javascript"></script>
 
-    <link rel="stylesheet" href="../../public/css/styles.css">
+    <link rel="stylesheet" href="../../public/css/styles.css" type="text/css">
+
 </head>
 <body>
 <div class="container">
@@ -40,13 +51,10 @@
                 </button>
                 <a class="navbar-brand">Timers</a>
             </div>
-            <!--<div class="collapse navbar-collapse" id="myNavbar">-->
             <ul class="nav navbar-nav">
                 <li id="homeTab"><a href="/">Home</a></li>
                 <li id="aboutTab"><a href="/about">About</a></li>
             </ul>
-            <!--// TODO Uncomment this div if anything is funky with the NAVBAR-->
-            <!--</div>-->
             <ul class="nav navbar-nav navbar-right">
                 {{#if loginid}}
                     <li><a href="logout"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>{{else}}
@@ -62,7 +70,6 @@
         </div>
     </div>
 {{/if}}
-<!--</div>-->
 <div>
     {{{ body }}}
 </div>
@@ -78,6 +85,8 @@
     </div>
 </div>
 <script src="../../public/js/timer.js"></script>
+
+<!--TODO MAKE SURE TO REMOVE THIS-->
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 </body>
 </html>
