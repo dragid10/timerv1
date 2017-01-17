@@ -10,29 +10,26 @@ $(document).ready(function () {
 
     // Used variables
     var timeToAdd = 0,
-        doneTime = "",
         curTime = 0,
         reset = 0,
         hours = [],
-        timers = [];
+        timers = [], timer1 = {
+            hrs:  0,
+            min:  0,
+            sec:  0,
+            name: ""
+        }, timer2 = {
+            hrs:  0,
+            min:  0,
+            sec:  0,
+            name: ""
 
-    var timer1 = {
-        hrs: 0,
-        min: 0,
-        sec: 0
-    };
-    var timer2 = {
-        hrs: 0,
-        min: 0,
-        sec: 0
-    };
-
-    var timer3 = {
-        hrs: 0,
-        min: 0,
-        sec: 0
-    };
-
+        }, timer3 = {
+            hrs:  0,
+            min:  0,
+            sec:  0,
+            name: ""
+        };
 
     // Loop to populate timers array
     for (var i = 0; i < 3; i++) {
@@ -109,7 +106,11 @@ $(document).ready(function () {
 
             if (state == 1 && timeLeft < 0) {
                 timers[i].state = 3;
-                reset = 2;
+                if (timeLeft <= -500) {
+                    reset = 1;
+                } else {
+                    reset = 2;
+                }
                 updateTimerDisplay(i);
             } else if (timers[i].state == 1) {
                 updateTimerDisplay(i);
@@ -132,18 +133,18 @@ $(document).ready(function () {
         q.hrs = q.hrs % 12;
         $(timeElement + " .timerdonetime").html(twoDigits(q.hrs) + ":" + twoDigits(q.min) + ":" + twoDigits(q.sec));
 
-        // TODO If problem, change back to > instead of >=
         if (timeLeft >= 0) {
             hms = convertFromSeconds(timeLeft);
             $(timeElement + " .seconds").val(twoDigits(hms.sec));
             $(timeElement + " .minutes").val(twoDigits(hms.min));
             $(timeElement + " .hours").val(twoDigits(hms.hrs));
+            reset = 0;
         } else {
             if (reset === 2) {
                 $(timeElement).css("background-color", "#FF0000");
             }
             $(timeElement).find(".reset").text("DONE");
-
+            $(timeElement + " .timername").val("");
         }
     }
 
@@ -156,22 +157,27 @@ $(document).ready(function () {
         timer.hrs = $(context).find(".hours").val();
         timer.min = $(context).find(".minutes").val();
         timer.sec = $(context).find(".seconds").val();
+        timer.name = $(context).find(".timername").val();
 
         return timer
     }
 
+    // Checks to see which timer you're in
     function isTimer1(context) {
         return $(context).closest(".timers").attr('id') === "timer1";
     }
 
+    // Checks to see which timer you're in
     function isTimer2(context) {
         return $(context).closest(".timers").attr('id') === "timer2";
     }
 
+    // Checks to see which timer you're in
     function isTimer3(context) {
         return $(context).closest(".timers").attr('id') === "timer3";
     }
 
+    // Hides the reset and done button
     function deleteBtn(context) {
         var startBtn = $(context).siblings(".btn-js");
         startBtn.switchClass("btn-info", "btn-success").switchClass("btn-warning", "btn-success");
@@ -179,6 +185,7 @@ $(document).ready(function () {
         $(context).hide();
     }
 
+    // Removes Red background when done buttong clicked
     function switchToDoneBtn(context) {
         if ($(context).closest(".timers").css("background-color")) {
             $(context).closest(".timers").css("background-color", "");
@@ -186,6 +193,7 @@ $(document).ready(function () {
         deleteBtn(context);
     }
 
+    // Updates the tiemr objects to reflect the form
     function updateTimerObj(context) {
         if ($(context).is(".hours")) {
 
@@ -205,9 +213,10 @@ $(document).ready(function () {
             if ($(context).val() > 59 || $(context).val() < 0 || $(context).val() === undefined) {
                 $(context).val("");
             }
+        } else if ($(context).is(".timername")) {
+            $(context).val().replace("<script>", "").replace("</script>", "");
         }
 
-        // console.log($(context));
         // Updates the Timer objects with the values from the input
         if ($(context).closest(".timers").attr('id') === "timer1") {
 
@@ -235,28 +244,24 @@ $(document).ready(function () {
     });
 
 // Checks that there are numbers being input into the number boxes NUM-CONTENT
-    $("#timer1").find(".hours, .minutes, .seconds").keyup(function () {
+    $("#timer1").find(".hours, .minutes, .seconds, .timername").keyup(function () {
         updateTimerObj($(this));
     });
-    $("#timer2").find(".hours, .minutes, .seconds").keyup(function () {
+    $("#timer2").find(".hours, .minutes, .seconds, .timername").keyup(function () {
         updateTimerObj($(this));
     });
-    $("#timer3").find(".hours, .minutes, .seconds").keyup(function () {
+    $("#timer3").find(".hours, .minutes, .seconds, .timername").keyup(function () {
         updateTimerObj($(this));
     });
-
 
     /**
      * TIMER CORE LOGIC
      */
-
-    var timeLeft = getNow() - doneTime;
-
 // The processes that occur when start button clicked!
     $(".btn-js").click(function () {
-//         console.log($(this).closest(".timers"));
-
+        // Loophole var that tricks js into not displaying red on reset blick
         reset = 0;
+
         // Switch statement that changes the Buttons and colors when clicked
         switch ($(this).text()) {
             // Start button is clicked, then it changes the color and adds the reset button next to it
@@ -273,7 +278,6 @@ $(document).ready(function () {
                     decrementTimers();
 
                 } else if ($(this).closest(".timers").attr('id') === "timer2") {
-                    // TODO Fix timer not being independent
                     timeToAdd = convertToSeconds(timer2.hrs, timer2.min, timer2.sec);
                     curTime = getNow();
                     tempTimer = timers[1];
@@ -283,7 +287,6 @@ $(document).ready(function () {
                     decrementTimers();
 
                 } else if ($(this).closest(".timers").attr('id') === "timer3") {
-                    // TODO Fix timer not being independent
                     timeToAdd = convertToSeconds(timer3.hrs, timer3.min, timer3.sec);
                     curTime = getNow();
                     tempTimer = timers[2];
@@ -332,11 +335,11 @@ $(document).ready(function () {
             default:
                 console.log("Hit Default statement for some reason");
         }
-        // Reset button clears timerss
+        // Checks to make sure reset btn has been created
         if ($(".reset").length) {
             $(".reset").click(function () {
-                // debugger;
                 switch ($(this).text()) {
+                    // Reset button clears timers
                     case "Reset":
                         reset = 1;
                         if (isTimer1($(this))) {
@@ -356,8 +359,8 @@ $(document).ready(function () {
                             deleteBtn($(this));
                         }
                         break;
+                    //    Done clears red background and resets forms
                     case "DONE":
-                        console.log($(this));
                         switchToDoneBtn($(this));
                         break;
 
